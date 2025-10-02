@@ -1,0 +1,141 @@
+/* ----------------- Body & Fonts ----------------- */
+body {
+    font-family: 'Roboto', sans-serif;
+    transition: background 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+body.light {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+
+/* ----------------- Navbar ----------------- */
+.navbar-light {
+    background-color: #ffd700 !important;
+    color: #1a73e8 !important;
+}
+
+.navbar-dark {
+    background-color: #212529 !important;
+    color: #f8f9fa !important;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* ----------------- Buttons ----------------- */
+.btn-warning {
+    background: #ffd700;
+    color: #1a73e8;
+    font-weight: bold;
+    border: none;
+    transition: background 0.3s;
+}
+
+.btn-warning:hover {
+    background: #ffc107;
+    color: #1a73e8;
+}
+
+.btn-success, .btn-secondary {
+    font-weight: bold;
+    border: none;
+}
+
+input[type="range"] {
+    vertical-align: middle;
+}
+
+/* ----------------- Sudoku Grid ----------------- */
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    table-layout: fixed;
+}
+
+td {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    border: 1px solid #000;
+    transition: background 0.3s;
+}
+
+td input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    border: none;
+    background: transparent;
+    color: inherit;
+}
+
+td input:focus {
+    outline: none;
+    background-color: rgba(255,255,0,0.3);
+    border-radius: 4px;
+}
+
+.highlight {
+    background-color: #ffd700 !important;
+    transition: background 0.3s;
+}
+
+/* Thicker borders for 3x3 sub-grids */
+tr:nth-child(3n) td {
+    border-bottom: 3px solid black;
+}
+
+td:nth-child(3n) {
+    border-right: 3px solid black;
+}
+
+/* ----------------- Sections ----------------- */
+h2, h5 {
+    font-weight: 700;
+}
+
+.container {
+    max-width: 900px;
+}
+
+/* ----------------- Image Output ----------------- */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* ----------------- Responsive ----------------- */
+@media(max-width:768px){
+    td {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+}
+
+/* ----------------- Alerts ----------------- */
+.alert {
+    max-width: 500px;
+    margin: 20px auto;
+    font-weight: 500;
+}
