@@ -1,62 +1,104 @@
-/* ----------------- Body & Fonts ----------------- */
+:root{
+    --bg-light: #f8f9fa;
+    --text-light: #212529;
+    --bg-dark: #121212;
+    --text-dark: #f8f9fa;
+
+    --accent: #ffd700;
+    --accent-dark: #ffc107;
+    --accent-contrast: #1a73e8;
+
+    --cell-size: 50px;
+    --cell-size-sm: 40px;
+
+    --border-color: #000;
+    --transition-fast: 0.2s;
+    --transition-slow: 0.35s;
+}
+
+/* Smooth background & color transitions for theme change */
+html, body {
+    transition: background-color var(--transition-slow) ease, color var(--transition-slow) ease;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
-    transition: background 0.3s, color 0.3s;
+    transition: background var(--transition-fast), color var(--transition-fast);
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+    background: var(--bg-light);
+    color: var(--text-light);
 }
 
-body.light {
-    background-color: #f8f9fa;
-    color: #212529;
+body.light{
+    background: var(--bg-light);
+    color: var(--text-light);
 }
 
-body.dark {
-    background-color: #121212;
-    color: #f8f9fa;
+body.dark{
+    background: var(--bg-dark);
+    color: var(--text-dark);
 }
 
-/* ----------------- Navbar ----------------- */
-.navbar-light {
-    background-color: #ffd700 !important;
-    color: #1a73e8 !important;
+.navbar.navbar-light {
+    background-color: var(--accent);
+    color: var(--accent-contrast);
 }
 
-.navbar-dark {
-    background-color: #212529 !important;
-    color: #f8f9fa !important;
+.navbar.navbar-dark {
+    background-color: #212529;
+    color: var(--text-dark);
 }
 
 .navbar-brand {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.5rem;
 }
 
-/* ----------------- Buttons ----------------- */
-.btn-warning {
-    background: #ffd700;
-    color: #1a73e8;
-    font-weight: bold;
-    border: none;
-    transition: background 0.3s;
+/* spacing for theme icon and text */
+#themeIconWrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.btn-warning:hover {
-    background: #ffc107;
-    color: #1a73e8;
+#themeText {
+    vertical-align: middle;
+}
+
+/* Buttons */
+.btn-warning {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-weight: 700;
+    border: none;
+    transition: background var(--transition-fast);
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background: var(--accent-dark);
+    color: var(--accent-contrast);
+    outline: none;
 }
 
 .btn-success, .btn-secondary {
-    font-weight: bold;
+    font-weight: 700;
     border: none;
+}
+
+button:focus, .btn:focus, input:focus {
+    outline: 3px solid rgba(26,115,232,0.18);
+    outline-offset: 2px;
+    border-radius: 6px;
 }
 
 input[type="range"] {
     vertical-align: middle;
 }
 
-/* ----------------- Sudoku Grid ----------------- */
+/* Table / grid */
 table {
     border-collapse: collapse;
     margin: 20px auto;
@@ -64,13 +106,14 @@ table {
 }
 
 td {
-    width: 50px;
-    height: 50px;
+    width: var(--cell-size);
+    height: var(--cell-size);
     text-align: center;
     vertical-align: middle;
     font-size: 1.5rem;
-    border: 1px solid #000;
-    transition: background 0.3s;
+    border: 1px solid var(--border-color);
+    transition: background var(--transition-fast);
+    padding: 0;
 }
 
 td input {
@@ -81,61 +124,123 @@ td input {
     border: none;
     background: transparent;
     color: inherit;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+td input[type=number]::-webkit-outer-spin-button,
+td input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 td input:focus {
     outline: none;
-    background-color: rgba(255,255,0,0.3);
+    background-color: rgba(255,255,0,0.18);
     border-radius: 4px;
 }
 
-.highlight {
-    background-color: #ffd700 !important;
-    transition: background 0.3s;
+tr td {
+    box-sizing: border-box;
 }
 
-/* Thicker borders for 3x3 sub-grids */
 tr:nth-child(3n) td {
-    border-bottom: 3px solid black;
+    border-bottom-width: 3px;
 }
 
 td:nth-child(3n) {
-    border-right: 3px solid black;
+    border-right-width: 3px;
 }
 
-/* ----------------- Sections ----------------- */
+/* Highlights */
+.highlight {
+    background-color: var(--accent) !important;
+    transition: background var(--transition-fast);
+}
+
 h2, h5 {
     font-weight: 700;
 }
 
 .container {
     max-width: 900px;
+    margin: 0 auto;
+    padding: 0 12px;
 }
 
-/* ----------------- Image Output ----------------- */
 img {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
     margin-top: 15px;
+    display: block;
 }
 
-/* ----------------- Responsive ----------------- */
-@media(max-width:768px){
+/* Solved image fade-in animation */
+.solved-fade {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 360ms ease, transform 360ms ease;
+}
+
+.solved-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Theme icon transitions */
+.theme-icon {
+  transition: opacity 220ms ease, transform 260ms ease;
+  opacity: 0;
+  transform: translateY(-2px) scale(0.98);
+  display: inline-block;
+}
+
+.icon-moon, .icon-sun {
+  color: currentColor;
+}
+
+.icon-moon { opacity: 1; transform: translateY(0) scale(1); }
+.icon-sun { opacity: 0; transform: translateY(-4px) scale(0.96); }
+
+#themeToggle.is-dark .icon-moon {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.96);
+}
+
+#themeToggle.is-dark .icon-sun {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (max-width: 768px){
     td {
-        width: 40px;
-        height: 40px;
+        width: var(--cell-size-sm);
+        height: var(--cell-size-sm);
         font-size: 1.2rem;
     }
+
     .btn {
-        font-size: 0.9rem;
-        padding: 5px 10px;
+        font-size: 0.95rem;
+        padding: 6px 12px;
+        min-height: 40px;
     }
 }
 
-/* ----------------- Alerts ----------------- */
 .alert {
     max-width: 500px;
     margin: 20px auto;
     font-weight: 500;
+}
+
+body.dark td {
+    border-color: #ddd;
+}
+
+td input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
 }
